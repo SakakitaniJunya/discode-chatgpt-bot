@@ -2,7 +2,7 @@ import os  # OSの機能にアクセスするためのライブラリをイン�
 
 import discord  # DiscordのAPIライブラリをインポートします
 import openai
-import settings
+
 # デフォルトのIntentsオブジェクトを取得します。IntentsはDiscordから受け取るイベントのタイプを制御します
 intents = discord.Intents.default()
 intents.messages = True
@@ -13,10 +13,9 @@ intents.guilds = True
 # Discordクライアントを初期化します。このクライアントはDiscordサーバーとの通信を処理します
 client = discord.Client(intents=intents)
 
-
 # 環境変数からDiscordのBotトークンを取得します。このトークンはBotをDiscord APIに認証するために使用されます
-my_secret = settings.TOKEN
-openai.api_key = settings.OPENAI_API_KEY
+my_secret = os.environ['TOKEN']
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 
 @client.event  # イベントハンドラのデコレータです。以下の関数はDiscordクライアントが準備ができたときに呼び出されます
